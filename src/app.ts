@@ -2,7 +2,8 @@ import path from 'node:path'
 import cors from 'cors'
 import express, { type Request, type Response } from 'express'
 
-import { getDateDetails } from './routes/get-date-details'
+import { getCurrentDateDetails } from './routes/get-current-date-details'
+import { getSpecificDateDetails } from './routes/get-specific-date-details'
 
 const app = express()
 
@@ -14,7 +15,8 @@ app.get('/', (req: Request, res: Response) => {
 	res.sendFile(path.join(__dirname, '../views/index.html'))
 })
 
-app.get('/api/:date', getDateDetails)
+app.get('/api/:date', getSpecificDateDetails)
+app.get('/api', getCurrentDateDetails)
 
 const PORT = 3333
 app.listen(PORT, () => {
